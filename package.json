@@ -8,6 +8,8 @@
 	},
 	"scripts": {
 		"start": "ts-node src/index.ts",
-		"build": "esbuild --bundle --platform=node --outfile=redirector src/index.ts"
+		"build": "esbuild --bundle --platform=node --outfile=redirector src/index.ts",
+		"make:deb": "./scripts/make:deb.sh",
+		"deploy": "./scripts/deploy.sh"
 	}
 }
