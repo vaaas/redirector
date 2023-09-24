@@ -16,7 +16,7 @@ export const app_container_factory = (args: string[]): IAppContainer => {
 	const container = {} as IAppContainer
 	container.config = config_factory(args)
 	container.map = new Map()
-	container.route_mapper = route_mapping_factory('./urls.txt', (map) => container.map = map)
+	container.route_mapper = route_mapping_factory(container.config.urls, (map) => container.map = map)
 	container.routes = routes_factory(container)
 	container.web_server = web_server_factory(container.config.http, container.routes.redirect)
 	return container
