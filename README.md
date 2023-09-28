@@ -61,3 +61,13 @@ If you have `dpkg-deb` and you are in a debian-based system:
 
 - install npm dependencies if you haven't already: `npm i`
 - create the deb file: `npm run make:deb`
+
+## Development
+
+- install npm dependencies: `npm i`
+- create a `./urls.txt` file with redirects that you wish to test
+- run the app: `npm run start`
+
+## Testing
+
+You can run all the unit tests through npm: `npm run test`
