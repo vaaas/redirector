@@ -2,6 +2,8 @@
 
 Simple node.js based url shortener / redirect service. HTTP only.
 
+You can find a demo app in [go.sexualise.it](https://go.sexualise.it). For example, try this redirect to Google: [go.sexualise.it/google](https://go.sexualise.it/google).
+
 ## Requirements
 
 - nodejs
