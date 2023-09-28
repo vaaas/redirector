@@ -27,12 +27,12 @@ Configuration is done by passing command-line flags.
 
 Available options:
 
-|---|---|---|
-|flag|option|description|example|
-|`--host`|IPv4 or domain name|address to listen to|`--host 127.0.0.1`|
-|`--port`|IP port|port to listen to|`--port 80`|
-|`--urls`|pathname|where to find the urls file|`--urls /etc/redirector/urls.txt`|
-|`--fd`|pathname|pathname of a unix domain socket that will be opened to listen for requests instead of a host and a port|`--fd /tmp/redirector.socket`|
+| flag | option | description | example |
+| --- | --- | --- | --- |
+| `--host` | IPv4 or domain name | address to listen to | `--host 127.0.0.1` |
+| `--port` | IP port | port to listen to | `--port 80` |
+| `--urls` | pathname | where to find the urls file | `--urls /etc/redirector/urls.txt` |
+| `--fd` | pathname | pathname of a unix domain socket that will be opened to listen for requests instead of a host and a port | `--fd /tmp/redirector.socket` |
 
 ## URLs file
 
