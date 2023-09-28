@@ -1,4 +1,4 @@
-import * as fs from 'node:fs'
+import { readFileSync, watch as watchFile } from 'node:fs'
 import { Result, bind, fold } from './lib/result'
 import { pipe } from './lib/function'
 
@@ -6,7 +6,7 @@ export type RouteMap = Map<string, string>
 
 const read_file = (pathname: string): Result<string> => {
 	try {
-		return fs.readFileSync(pathname, 'utf-8')
+		return readFileSync(pathname, 'utf-8')
 	} catch (e) {
 		return e as Error
 	}
@@ -32,10 +32,15 @@ export type IRouteMapper = {
 	stop: () => void
 }
 
-export const route_mapping_factory = (pathname: string, on_update: (map: RouteMap) => void): IRouteMapper => {
+export const route_mapping_factory = (
+	pathname: string,
+	on_update: (map: RouteMap) => void,
+	read: typeof read_file = read_file,
+	watch: typeof watchFile = watchFile,
+): IRouteMapper => {
 	const do_business = () => pipe(
 		pathname,
-		read_file,
+		read,
 		bind(parse_file),
 		fold(
 			error => console.error(error),
@@ -43,7 +48,7 @@ export const route_mapping_factory = (pathname: string, on_update: (map: RouteMa
 		),
 	)
 
-	const watcher = fs.watch(pathname, (event) => {
+	const watcher = watch(pathname, (event) => {
 		if (event === 'change') {
 			console.log('URLs file changed')
 			do_business()
