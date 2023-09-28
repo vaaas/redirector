@@ -9,7 +9,7 @@
 		"ts-node": "^10.9.1"
 	},
 	"scripts": {
-		"start": "ts-node src/index.ts",
+		"start": "node --loader ts-node/esm src/index.ts",
 		"test": "node --loader ts-node/esm --test ./src/**/*.test.ts",
 		"build": "esbuild --bundle --platform=node --outfile=redirector src/index.ts",
 		"make:deb": "./scripts/make:deb.sh",
