@@ -1,22 +1,25 @@
-import * as http from 'node:http'
-import { Unary } from './data'
-import { Response } from './Response'
+import {
+	type IncomingMessage,
+	type ServerResponse,
+	type Server,
+	createServer,
+} from 'node:http'
+import { Unary } from './lib/data'
+import { Response } from './lib/response'
 import { Config } from './config'
 
-const remove_query = (x: string) => {
+export const remove_query = (x: string) => {
 	const i = x.indexOf('?')
 	if (i === -1) return x
 	else return x.slice(0, i)
 }
 
-export const web_server_factory = (config: Config['http'], handler: Unary<string, Response>): http.Server => {
-	const server = http.createServer((req: http.IncomingMessage, res: http.ServerResponse) => {
-		const url = remove_query(req.url!)
-		handler(url).serve(res)
-	})
-	if ('host' in config)
-		server.listen(config.port, config.host)
-	else
-		server.listen(config.pathname)
+export const request_listener = (handler: Unary<string, Response>) => (req: IncomingMessage, res: ServerResponse) =>
+	handler(remove_query(req.url!)).serve(res)
+
+export const web_server_factory = (config: Config['http'], handler: Unary<string, Response>): Server => {
+	const server = createServer(request_listener(handler));
+	if ('host' in config) server.listen(config.port, config.host)
+	else server.listen(config.pathname)
 	return server
 }

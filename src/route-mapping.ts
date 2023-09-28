@@ -1,6 +1,6 @@
 import * as fs from 'node:fs'
-import { Result, bind, fold } from './result'
-import { pipe } from './function'
+import { Result, bind, fold } from './lib/result'
+import { pipe } from './lib/function'
 
 export type RouteMap = Map<string, string>
 
